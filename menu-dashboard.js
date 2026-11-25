@@ -98,26 +98,6 @@ function mostrarToastDashboard(mensaje, tipo = "success") {
 
 document.addEventListener("DOMContentLoaded", () => {
   inicializarMenuDashboard();
-
-  // Feedback elegante mientras conectamos el CRUD completo en la Fase 5
-  const btnAgregar = document.getElementById("btn-agregar-libro");
-  btnAgregar?.addEventListener("click", () => {
-    mostrarToastDashboard(
-      "El modal de creación de libros se conectará en la Fase 5.",
-      "success"
-    );
-  });
-
-  const tablaBody = document.getElementById("tabla-libros-body");
-  tablaBody?.addEventListener("click", (evento) => {
-    const boton = evento.target.closest("[data-action]");
-    if (!boton) return;
-
-    const { action, code } = boton.dataset;
-    const textoAccion = action === "editar" ? "Edición" : "Eliminación";
-    mostrarToastDashboard(
-      `${textoAccion} de ${code} lista para activarse con CRUD en la Fase 5.`,
-      action === "eliminar" ? "error" : "success"
-    );
-  });
 });
+
+ 
