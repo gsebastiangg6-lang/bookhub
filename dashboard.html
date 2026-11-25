@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel administrativo de BookHub para gestionar el catálogo, inventario e indicadores de libros en Colombia.">
+  <title>BookHub | Panel Administrativo</title>
+
+  <!-- Google Fonts: misma identidad tipográfica que la Landing Page -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Reutiliza las variables :root y botones base de styles.css -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body class="dashboard-body">
+  <a href="#dashboard-main" class="skip-link">Saltar al panel principal</a>
+
+  <!-- Backdrop semitransparente para cierre en móvil -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+  <div class="dashboard-layout">
+    <!-- SIDEBAR DE NAVEGACIÓN -->
+    <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="Menú lateral del panel administrativo">
+      <div class="sidebar-header">
+        <a href="index.html" class="brand-logo brand-logo-light" aria-label="BookHub - Volver a la tienda">
+          <span class="brand-mark" aria-hidden="true">BH</span>
+          <span class="brand-text">Book<strong>Hub</strong></span>
+        </a>
+        <span class="sidebar-badge">Admin</span>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navegación administrativa">
+        <ul class="sidebar-list">
+          <li>
+            <a href="#resumen-kpis" class="sidebar-link is-active" aria-current="page">
+              <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+                <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+                <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+                <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+              </svg>
+              <span>Resumen general</span>
+            </a>
+          </li>
+          <li>
+            <a href="#inventario-libros" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              <span>Catálogo e inventario</span>
+            </a>
+          </li>
+          <li>
+            <a href="#estadisticas-panel" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+              <span>Estadísticas</span>
+            </a>
+          </li>
+          <li>
+            <a href="#inventario-libros" class="sidebar-link">
+              <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                <line x1="12" y1="9" x2="12" y2="13"></line>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+              <span>Alertas de stock</span>
+            </a>
+          </li>
+          <li class="sidebar-divider" aria-hidden="true"></li>
+          <li>
+            <a href="index.html" class="sidebar-link sidebar-link-store">
+              <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>Ver tienda (Landing)</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p class="sidebar-user">Administrador Editorial</p>
+        <span class="sidebar-location">BookHub &bull; Colombia</span>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <div class="dashboard-content">
+      <!-- TOPBAR -->
+      <header class="dashboard-topbar">
+        <div class="topbar-left">
+          <button
+            type="button"
+            class="hamburger-btn"
+            id="hamburger-btn"
+            aria-label="Abrir menú lateral"
+            aria-expanded="false"
+            aria-controls="dashboard-sidebar"
+          >
+            <span class="hamburger-icon" aria-hidden="true">=</span>
+          </button>
+
+          <div class="topbar-heading">
+            <h1 class="dashboard-title">Panel de Inventario</h1>
+            <p class="dashboard-welcome">Bienvenido al centro de control editorial de BookHub.</p>
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <a href="index.html" class="btn btn-outline btn-sm">Ir a la tienda</a>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-agregar-libro">
+            + Agregar libro
+          </button>
+        </div>
+      </header>
+
+      <main class="dashboard-main" id="dashboard-main">
+        <!-- 3 TARJETAS KPI -->
+        <section class="kpi-section" id="resumen-kpis" aria-labelledby="kpi-heading">
+          <h2 id="kpi-heading" class="sr-only">Indicadores clave del catálogo</h2>
+
+          <div class="kpi-grid">
+            <article class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Libros registrados</span>
+                <span class="kpi-icon-box kpi-icon-primary" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
+                </span>
+              </div>
+              <p class="kpi-value" id="kpi-total-libros">5</p>
+              <p class="kpi-description">Títulos activos disponibles en el catálogo editorial.</p>
+            </article>
+
+            <article class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Inventario bajo</span>
+                <span class="kpi-icon-box kpi-icon-warning" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                </span>
+              </div>
+              <p class="kpi-value" id="kpi-inventario-bajo">2</p>
+              <p class="kpi-description">Títulos con existencias iguales o inferiores al stock mínimo.</p>
+            </article>
+
+            <article class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Valor del inventario</span>
+                <span class="kpi-icon-box kpi-icon-accent" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                  </svg>
+                </span>
+              </div>
+              <p class="kpi-value" id="kpi-valor-inventario">$5.238.000 <small>COP</small></p>
+              <p class="kpi-description">Valoración total (precio unitario por unidades disponibles).</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- TABLA RESPONSIVE DE LIBROS (7 COLUMNAS + ACCIONES) -->
+        <section class="panel-card" id="inventario-libros" aria-labelledby="tabla-libros-titulo">
+          <div class="panel-card-header">
+            <div>
+              <span class="eyebrow">Control de catálogo</span>
+              <h2 id="tabla-libros-titulo" class="panel-card-title">Inventario de libros</h2>
+            </div>
+            <span class="panel-meta">Mostrando 5 títulos de muestra</span>
+          </div>
+
+          <div class="table-responsive" role="region" aria-label="Tabla de inventario de libros" tabindex="0">
+            <table class="inventory-table">
+              <thead>
+                <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Libro</th>
+                  <th scope="col">Categoría</th>
+                  <th scope="col" class="text-right">Precio COP</th>
+                  <th scope="col" class="text-center">Stock</th>
+                  <th scope="col">Autor</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col" class="text-right">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-libros-body">
+                <tr>
+                  <td class="cell-code">LIB001</td>
+                  <td class="cell-title">Cien años de soledad</td>
+                  <td>Literatura</td>
+                  <td class="text-right cell-num">$55.000</td>
+                  <td class="text-center cell-num">18</td>
+                  <td>Gabriel García Márquez</td>
+                  <td><span class="status-badge status-disponible">Disponible</span></td>
+                  <td class="cell-actions">
+                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB001" aria-label="Editar Cien años de soledad">Editar</button>
+                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB001" aria-label="Eliminar Cien años de soledad">Eliminar</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="cell-code">LIB002</td>
+                  <td class="cell-title">Clean Code</td>
+                  <td>Ciencia y tecnología</td>
+                  <td class="text-right cell-num">$120.000</td>
+                  <td class="text-center cell-num">4</td>
+                  <td>Robert C. Martin</td>
+                  <td><span class="status-badge status-bajo">Stock bajo</span></td>
+                  <td class="cell-actions">
+                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB002" aria-label="Editar Clean Code">Editar</button>
+                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB002" aria-label="Eliminar Clean Code">Eliminar</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="cell-code">LIB003</td>
+                  <td class="cell-title">El principito</td>
+                  <td>Infantil y juvenil</td>
+                  <td class="text-right cell-num">$32.000</td>
+                  <td class="text-center cell-num">24</td>
+                  <td>Antoine de Saint-Exupéry</td>
+                  <td><span class="status-badge status-disponible">Disponible</span></td>
+                  <td class="cell-actions">
+                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB003" aria-label="Editar El principito">Editar</button>
+                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB003" aria-label="Eliminar El principito">Eliminar</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="cell-code">LIB004</td>
+                  <td class="cell-title">Sapiens</td>
+                  <td>Historia</td>
+                  <td class="text-right cell-num">$89.000</td>
+                  <td class="text-center cell-num">0</td>
+                  <td>Yuval Noah Harari</td>
+                  <td><span class="status-badge status-agotado">Agotado</span></td>
+                  <td class="cell-actions">
+                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB004" aria-label="Editar Sapiens">Editar</button>
+                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB004" aria-label="Eliminar Sapiens">Eliminar</button>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td class="cell-code">LIB005</td>
+                  <td class="cell-title">Hábitos atómicos</td>
+                  <td>Desarrollo personal</td>
+                  <td class="text-right cell-num">$75.000</td>
+                  <td class="text-center cell-num">40</td>
+                  <td>James Clear</td>
+                  <td><span class="status-badge status-disponible">Disponible</span></td>
+                  <td class="cell-actions">
+                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB005" aria-label="Editar Hábitos atómicos">Editar</button>
+                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB005" aria-label="Eliminar Hábitos atómicos">Eliminar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ESPACIO PREPARADO PARA FASE 5 (CHART.JS) -->
+        <section class="panel-card panel-chart-placeholder" id="estadisticas-panel" aria-labelledby="estadisticas-titulo">
+          <div class="panel-card-header">
+            <div>
+              <span class="eyebrow">Analítica editorial</span>
+              <h2 id="estadisticas-titulo" class="panel-card-title">Distribución de libros por categoría</h2>
+            </div>
+          </div>
+          <p class="chart-placeholder-note">
+            Espacio reservado para la visualización interactiva con Chart.js que se conectará al dataset completo en la Fase 5.
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="menu-dashboard.js" defer></script>
+</body>
+</html>
