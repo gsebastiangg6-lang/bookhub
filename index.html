@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BookHub: librería digital colombiana de libros impresos. Explora literatura, ciencia, historia, educación y desarrollo personal con envíos a todo Colombia.">
+  <title>BookHub | Librería Digital Colombiana</title>
+
+  <!-- Google Fonts: Playfair Display (Serif editorial) + Plus Jakarta Sans (UI limpia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- HEADER -->
+  <header class="site-header" id="inicio">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" aria-label="BookHub - Inicio">
+        <span class="brand-mark" aria-hidden="true">BH</span>
+        <span class="brand-text">Book<strong>Hub</strong></span>
+      </a>
+
+      <button
+        type="button"
+        class="menu-toggle"
+        id="landing-menu-toggle"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="landing-nav"
+      >
+        <span class="menu-toggle-icon" aria-hidden="true">=</span>
+      </button>
+
+      <nav class="main-nav" id="landing-nav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="#categorias" class="nav-link">Categorías</a></li>
+          <li><a href="#destacados" class="nav-link">Destacados</a></li>
+          <li><a href="#beneficios" class="nav-link">Beneficios</a></li>
+          <li><a href="#resenas" class="nav-link">Autores y reseñas</a></li>
+          <li><a href="#suscripcion" class="nav-link">Club lector</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="dashboard.html" class="btn btn-outline btn-sm">Panel Admin</a>
+          <a href="#destacados" class="btn btn-primary btn-sm">Explorar catálogo</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main id="contenido-principal">
+    <!-- HERO EDITORIAL -->
+    <section class="hero-section" aria-labelledby="hero-titulo">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">Librería Digital Colombiana</span>
+          <h1 id="hero-titulo" class="hero-title">
+            Historias impresas que transforman tu día, directo a tu puerta en Colombia.
+          </h1>
+          <p class="hero-subtitle">
+            Descubre un catálogo curado de literatura, ciencia, historia, educación y desarrollo personal.
+            Ediciones impresas seleccionadas para estudiantes, docentes y lectores apasionados.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#destacados" class="btn btn-primary">Explorar catálogo</a>
+            <a href="dashboard.html" class="btn btn-secondary">Gestionar inventario</a>
+          </div>
+
+          <dl class="hero-metrics" aria-label="Indicadores de confianza de BookHub">
+            <div class="metric-item">
+              <dt>Envíos nacionales</dt>
+              <dd>32 departamentos</dd>
+            </div>
+            <div class="metric-item">
+              <dt>Curaduría editorial</dt>
+              <dd>6 áreas clave</dd>
+            </div>
+            <div class="metric-item">
+              <dt>Despacho promedio</dt>
+              <dd>24 – 48 horas</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="hero-media">
+          <img
+            src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1000&q=80"
+            alt="Estanterías de madera iluminadas con libros impresos en una librería acogedora"
+            class="hero-image"
+            width="600"
+            height="720"
+          >
+          <figcaption class="hero-caption">
+            <strong>Selección del mes:</strong> Ediciones impresas con empaque ecológico protector.
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS (6 GÉNEROS OBLIGATORIOS) -->
+    <section class="section section-surface" id="categorias" aria-labelledby="categorias-titulo">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Explora por área</span>
+          <h2 id="categorias-titulo" class="section-title">Categorías de nuestro catálogo</h2>
+          <p class="section-description">
+            Navega entre seis colecciones organizadas para estudio, investigación o lectura por placer.
+          </p>
+        </div>
+
+        <div class="categories-grid">
+          <article class="category-card">
+            <span class="category-icon" aria-hidden="true">01</span>
+            <h3 class="category-title">Literatura</h3>
+            <p class="category-text">Novela clásica, realismo mágico, narrativa contemporánea y cuento latinoamericano.</p>
+            <a href="#destacados" class="category-link">Ver títulos &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <span class="category-icon" aria-hidden="true">02</span>
+            <h3 class="category-title">Ciencia y tecnología</h3>
+            <p class="category-text">Ingeniería de software, divulgación científica, datos e innovación tecnológica.</p>
+            <a href="#destacados" class="category-link">Ver títulos &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <span class="category-icon" aria-hidden="true">03</span>
+            <h3 class="category-title">Educación</h3>
+            <p class="category-text">Pedagogía, metodologías activas, textos universitarios y herramientas para docentes.</p>
+            <a href="#destacados" class="category-link">Ver títulos &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <span class="category-icon" aria-hidden="true">04</span>
+            <h3 class="category-title">Historia</h3>
+            <p class="category-text">Historia universal, memoria colombiana, biografías y ensayos políticos.</p>
+            <a href="#destacados" class="category-link">Ver títulos &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <span class="category-icon" aria-hidden="true">05</span>
+            <h3 class="category-title">Infantil y juvenil</h3>
+            <p class="category-text">Fábulas ilustradas, clásicos formativos y novelas que despiertan el hábito lector.</p>
+            <a href="#destacados" class="category-link">Ver títulos &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <span class="category-icon" aria-hidden="true">06</span>
+            <h3 class="category-title">Desarrollo personal</h3>
+            <p class="category-text">Productividad consciente, hábitos sostenibles, liderazgo y bienestar integral.</p>
+            <a href="#destacados" class="category-link">Ver títulos &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIBROS DESTACADOS Y NOVEDADES -->
+    <section class="section" id="destacados" aria-labelledby="destacados-titulo">
+      <div class="container">
+        <div class="section-header section-header-split">
+          <div>
+            <span class="eyebrow">Curaduría y novedades</span>
+            <h2 id="destacados-titulo" class="section-title">Libros destacados de la temporada</h2>
+          </div>
+          <a href="dashboard.html" class="btn btn-outline">Ver inventario completo</a>
+        </div>
+
+        <div class="books-grid">
+          <article class="book-card">
+            <div class="book-cover-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=600&q=80"
+                alt="Edición impresa de Cien años de soledad sobre una mesa de madera"
+                class="book-cover"
+                loading="lazy"
+              >
+              <span class="book-badge">Literatura</span>
+            </div>
+            <div class="book-body">
+              <p class="book-meta">Editorial Sudamericana &bull; 1967</p>
+              <h3 class="book-title">Cien años de soledad</h3>
+              <p class="book-author">Gabriel García Márquez</p>
+              <div class="book-footer">
+                <span class="book-price">$55.000 <small>COP</small></span>
+                <a href="dashboard.html" class="btn btn-primary btn-xs">Ver en catálogo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card">
+            <div class="book-cover-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=600&q=80"
+                alt="Libro técnico de desarrollo de software y código limpio"
+                class="book-cover"
+                loading="lazy"
+              >
+              <span class="book-badge">Ciencia y tecnología</span>
+            </div>
+            <div class="book-body">
+              <p class="book-meta">Prentice Hall &bull; 2008</p>
+              <h3 class="book-title">Clean Code</h3>
+              <p class="book-author">Robert C. Martin</p>
+              <div class="book-footer">
+                <span class="book-price">$120.000 <small>COP</small></span>
+                <a href="dashboard.html" class="btn btn-primary btn-xs">Ver en catálogo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card">
+            <div class="book-cover-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80"
+                alt="Edición clásica de El principito junto a otros libros literarios"
+                class="book-cover"
+                loading="lazy"
+              >
+              <span class="book-badge">Infantil y juvenil</span>
+            </div>
+            <div class="book-body">
+              <p class="book-meta">Editorial Norma &bull; 1943</p>
+              <h3 class="book-title">El principito</h3>
+              <p class="book-author">Antoine de Saint-Exupéry</p>
+              <div class="book-footer">
+                <span class="book-price">$32.000 <small>COP</small></span>
+                <a href="dashboard.html" class="btn btn-primary btn-xs">Ver en catálogo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card">
+            <div class="book-cover-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=600&q=80"
+                alt="Libro de historia universal Sapiens sobre escritorio editorial"
+                class="book-cover"
+                loading="lazy"
+              >
+              <span class="book-badge">Historia</span>
+            </div>
+            <div class="book-body">
+              <p class="book-meta">Debate &bull; 2011</p>
+              <h3 class="book-title">Sapiens</h3>
+              <p class="book-author">Yuval Noah Harari</p>
+              <div class="book-footer">
+                <span class="book-price">$89.000 <small>COP</small></span>
+                <a href="dashboard.html" class="btn btn-primary btn-xs">Ver en catálogo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card">
+            <div class="book-cover-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=600&q=80"
+                alt="Cuaderno y libro de desarrollo personal Hábitos atómicos"
+                class="book-cover"
+                loading="lazy"
+              >
+              <span class="book-badge">Desarrollo personal</span>
+            </div>
+            <div class="book-body">
+              <p class="book-meta">Paidós &bull; 2018</p>
+              <h3 class="book-title">Hábitos atómicos</h3>
+              <p class="book-author">James Clear</p>
+              <div class="book-footer">
+                <span class="book-price">$75.000 <small>COP</small></span>
+                <a href="dashboard.html" class="btn btn-primary btn-xs">Ver en catálogo</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card">
+            <div class="book-cover-wrapper">
+              <img
+                src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=600&q=80"
+                alt="Selección de libros de educación y pedagogía contemporánea"
+                class="book-cover"
+                loading="lazy"
+              >
+              <span class="book-badge">Educación</span>
+            </div>
+            <div class="book-body">
+              <p class="book-meta">Siglo XXI Editores &bull; 1968</p>
+              <h3 class="book-title">Pedagogía del oprimido</h3>
+              <p class="book-author">Paulo Freire</p>
+              <div class="book-footer">
+                <span class="book-price">$48.000 <small>COP</small></span>
+                <a href="dashboard.html" class="btn btn-primary btn-xs">Ver en catálogo</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOQUE: TU PRÓXIMA LECTURA COMIENZA AQUÍ -->
+    <section class="section section-dark" id="beneficios" aria-labelledby="beneficios-titulo">
+      <div class="container">
+        <div class="section-header section-header-center">
+          <span class="eyebrow eyebrow-light">Experiencia BookHub Colombia</span>
+          <h2 id="beneficios-titulo" class="section-title">Tu próxima lectura comienza aquí</h2>
+          <p class="section-description">
+            Diseñamos cada pedido para que recibir un libro impreso sea tan disfrutable como leerlo.
+          </p>
+        </div>
+
+        <div class="benefits-grid">
+          <article class="benefit-card">
+            <span class="benefit-number" aria-hidden="true">01</span>
+            <h3 class="benefit-title">Envíos a todo Colombia</h3>
+            <p class="benefit-text">Cobertura en ciudades principales y municipios con seguimiento en línea de tu paquete.</p>
+          </article>
+
+          <article class="benefit-card">
+            <span class="benefit-number" aria-hidden="true">02</span>
+            <h3 class="benefit-title">Pago seguro y flexible</h3>
+            <p class="benefit-text">Paga con PSE, tarjetas débito/crédito o contra entrega en zonas habilitadas.</p>
+          </article>
+
+          <article class="benefit-card">
+            <span class="benefit-number" aria-hidden="true">03</span>
+            <h3 class="benefit-title">Curaduría independiente</h3>
+            <p class="benefit-text">Recomendaciones reales preparadas por lectores, docentes y libreros especializados.</p>
+          </article>
+
+          <article class="benefit-card">
+            <span class="benefit-number" aria-hidden="true">04</span>
+            <h3 class="benefit-title">Empaque ecológico</h3>
+            <p class="benefit-text">Protección reforzada libre de plásticos para que cada portada llegue impecable.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AUTORES Y RESEÑAS DE LECTORES -->
+    <section class="section section-surface" id="resenas" aria-labelledby="resenas-titulo">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Comunidad lectora</span>
+          <h2 id="resenas-titulo" class="section-title">Autores referentes y voces de lectores</h2>
+          <p class="section-description">
+            Lo que dicen quienes ya construyen su biblioteca personal con BookHub.
+          </p>
+        </div>
+
+        <div class="authors-strip" aria-label="Autores destacados en el catálogo">
+          <span class="author-pill">Gabriel García Márquez</span>
+          <span class="author-pill">Yuval Noah Harari</span>
+          <span class="author-pill">James Clear</span>
+          <span class="author-pill">Robert C. Martin</span>
+          <span class="author-pill">Antoine de Saint-Exupéry</span>
+          <span class="author-pill">Paulo Freire</span>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review-card">
+            <p class="review-quote">
+              “Encontré textos de ingeniería de software que llevaba meses buscando en físico. El empaque llegó perfecto a Bogotá en menos de 48 horas.”
+            </p>
+            <footer class="review-author">
+              <strong>Camila Morales</strong>
+              <span>Ingeniera de Sistemas &bull; Bogotá</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <p class="review-quote">
+              “La organización por categorías me ahorra muchísimo tiempo al preparar la bibliografía de mis clases universitarias. Excelente selección en historia.”
+            </p>
+            <footer class="review-author">
+              <strong>Andrés Felipe Rojas</strong>
+              <span>Docente universitario &bull; Medellín</span>
+            </footer>
+          </article>
+
+          <article class="review-card">
+            <p class="review-quote">
+              “Pedí libros infantiles y de literatura colombiana para mi familia en Boyacá. Todo llegó protegido, original y con precios muy claros en pesos.”
+            </p>
+            <footer class="review-author">
+              <strong>Laura Valentina Díaz</strong>
+              <span>Lectora frecuente &bull; Tunja</span>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULARIO DE SUSCRIPCIÓN -->
+    <section class="section" id="suscripcion" aria-labelledby="suscripcion-titulo">
+      <div class="container">
+        <div class="newsletter-box">
+          <div class="newsletter-content">
+            <span class="eyebrow">Boletín editorial</span>
+            <h2 id="suscripcion-titulo" class="section-title">Únete al Club de Lectura BookHub</h2>
+            <p class="section-description">
+              Recibe una vez por semana recomendaciones de novedades, lanzamientos editoriales y beneficios exclusivos para lectores en Colombia. Sin spam.
+            </p>
+          </div>
+
+          <form class="newsletter-form" id="form-suscripcion" novalidate>
+            <div class="form-group">
+              <label for="suscriptor-nombre" class="form-label">Nombre completo</label>
+              <input
+                type="text"
+                id="suscriptor-nombre"
+                name="nombre"
+                class="form-input"
+                placeholder="Ej. Sofía Hernández"
+                minlength="3"
+                required
+                aria-describedby="error-nombre"
+              >
+              <span class="form-error" id="error-nombre" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="suscriptor-correo" class="form-label">Correo electrónico</label>
+              <input
+                type="email"
+                id="suscriptor-correo"
+                name="correo"
+                class="form-input"
+                placeholder="Ej. sofia@correo.com"
+                required
+                aria-describedby="error-correo"
+              >
+              <span class="form-error" id="error-correo" role="alert"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Suscribirme al club</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-logo brand-logo-light">
+          <span class="brand-mark" aria-hidden="true">BH</span>
+          <span class="brand-text">Book<strong>Hub</strong></span>
+        </a>
+        <p class="footer-description">
+          Librería digital colombiana dedicada a conectar lectores con libros impresos de calidad en todo el país.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Explorar</h3>
+        <ul class="footer-links">
+          <li><a href="#categorias">Categorías</a></li>
+          <li><a href="#destacados">Libros destacados</a></li>
+          <li><a href="#beneficios">Beneficios de compra</a></li>
+          <li><a href="#suscripcion">Club de lectura</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Plataforma</h3>
+        <ul class="footer-links">
+          <li><a href="dashboard.html">Panel Administrativo</a></li>
+          <li><a href="#resenas">Reseñas de lectores</a></li>
+          <li><a href="#inicio">Volver arriba</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="footer-heading">Comunidad</h3>
+        <ul class="footer-links">
+          <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 BookHub Colombia. Todos los derechos reservados.</p>
+      <p>Hecho con HTML5, CSS3 puro y JavaScript Vanilla.</p>
+    </div>
+  </footer>
+
+  <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="landing.js" defer></script>
+</body>
+</html>
