@@ -6,23 +6,26 @@
   <meta name="description" content="Panel administrativo de BookHub para gestionar el catálogo, inventario e indicadores de libros en Colombia.">
   <title>BookHub | Panel Administrativo</title>
 
-  <!-- Google Fonts: misma identidad tipográfica que la Landing Page -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Reutiliza las variables :root y botones base de styles.css -->
+  <!-- Estilos compartidos -->
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="dashboard.css">
+
+  <!-- Chart.js (única librería permitida para el gráfico estadístico) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
 </head>
 <body class="dashboard-body">
   <a href="#dashboard-main" class="skip-link">Saltar al panel principal</a>
 
-  <!-- Backdrop semitransparente para cierre en móvil -->
+  <!-- Backdrop del sidebar en móvil -->
   <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
 
   <div class="dashboard-layout">
-    <!-- SIDEBAR DE NAVEGACIÓN -->
+    <!-- SIDEBAR -->
     <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="Menú lateral del panel administrativo">
       <div class="sidebar-header">
         <a href="index.html" class="brand-logo brand-logo-light" aria-label="BookHub - Volver a la tienda">
@@ -65,7 +68,7 @@
             </a>
           </li>
           <li>
-            <a href="#inventario-libros" class="sidebar-link">
+            <a href="#inventario-libros" class="sidebar-link" id="enlace-alertas-stock">
               <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
                 <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
                 <line x1="12" y1="9" x2="12" y2="13"></line>
@@ -95,7 +98,6 @@
 
     <!-- ÁREA PRINCIPAL -->
     <div class="dashboard-content">
-      <!-- TOPBAR -->
       <header class="dashboard-topbar">
         <div class="topbar-left">
           <button
@@ -111,7 +113,7 @@
 
           <div class="topbar-heading">
             <h1 class="dashboard-title">Panel de Inventario</h1>
-            <p class="dashboard-welcome">Bienvenido al centro de control editorial de BookHub.</p>
+            <p class="dashboard-welcome">Administra el catálogo de BookHub con persistencia en tiempo real.</p>
           </div>
         </div>
 
@@ -124,7 +126,7 @@
       </header>
 
       <main class="dashboard-main" id="dashboard-main">
-        <!-- 3 TARJETAS KPI -->
+        <!-- 3 TARJETAS KPI DINÁMICAS -->
         <section class="kpi-section" id="resumen-kpis" aria-labelledby="kpi-heading">
           <h2 id="kpi-heading" class="sr-only">Indicadores clave del catálogo</h2>
 
@@ -139,7 +141,7 @@
                   </svg>
                 </span>
               </div>
-              <p class="kpi-value" id="kpi-total-libros">5</p>
+              <p class="kpi-value" id="kpi-total-libros">0</p>
               <p class="kpi-description">Títulos activos disponibles en el catálogo editorial.</p>
             </article>
 
@@ -154,7 +156,7 @@
                   </svg>
                 </span>
               </div>
-              <p class="kpi-value" id="kpi-inventario-bajo">2</p>
+              <p class="kpi-value" id="kpi-inventario-bajo">0</p>
               <p class="kpi-description">Títulos con existencias iguales o inferiores al stock mínimo.</p>
             </article>
 
@@ -168,131 +170,253 @@
                   </svg>
                 </span>
               </div>
-              <p class="kpi-value" id="kpi-valor-inventario">$5.238.000 <small>COP</small></p>
+              <p class="kpi-value" id="kpi-valor-inventario">$0 <small>COP</small></p>
               <p class="kpi-description">Valoración total (precio unitario por unidades disponibles).</p>
             </article>
           </div>
         </section>
 
-        <!-- TABLA RESPONSIVE DE LIBROS (7 COLUMNAS + ACCIONES) -->
-        <section class="panel-card" id="inventario-libros" aria-labelledby="tabla-libros-titulo">
+        <!-- CATÁLOGO DINÁMICO: BÚSQUEDA, FILTROS Y CARDS -->
+        <section class="panel-card" id="inventario-libros" aria-labelledby="catalogo-titulo">
           <div class="panel-card-header">
             <div>
               <span class="eyebrow">Control de catálogo</span>
-              <h2 id="tabla-libros-titulo" class="panel-card-title">Inventario de libros</h2>
+              <h2 id="catalogo-titulo" class="panel-card-title">Catálogo de libros</h2>
             </div>
-            <span class="panel-meta">Mostrando 5 títulos de muestra</span>
+            <span class="panel-meta" id="contador-resultados">Cargando catálogo...</span>
           </div>
 
-          <div class="table-responsive" role="region" aria-label="Tabla de inventario de libros" tabindex="0">
-            <table class="inventory-table">
-              <thead>
-                <tr>
-                  <th scope="col">Código</th>
-                  <th scope="col">Libro</th>
-                  <th scope="col">Categoría</th>
-                  <th scope="col" class="text-right">Precio COP</th>
-                  <th scope="col" class="text-center">Stock</th>
-                  <th scope="col">Autor</th>
-                  <th scope="col">Estado</th>
-                  <th scope="col" class="text-right">Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tabla-libros-body">
-                <tr>
-                  <td class="cell-code">LIB001</td>
-                  <td class="cell-title">Cien años de soledad</td>
-                  <td>Literatura</td>
-                  <td class="text-right cell-num">$55.000</td>
-                  <td class="text-center cell-num">18</td>
-                  <td>Gabriel García Márquez</td>
-                  <td><span class="status-badge status-disponible">Disponible</span></td>
-                  <td class="cell-actions">
-                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB001" aria-label="Editar Cien años de soledad">Editar</button>
-                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB001" aria-label="Eliminar Cien años de soledad">Eliminar</button>
-                  </td>
-                </tr>
+          <!-- BARRA DE BÚSQUEDA Y 3 FILTROS COMBINABLES -->
+          <div class="filters-bar" role="search" aria-label="Filtrar catálogo de libros">
+            <div class="filter-field filter-search">
+              <label for="filtro-busqueda" class="filter-label">Buscar libro</label>
+              <input
+                type="search"
+                id="filtro-busqueda"
+                class="form-input"
+                placeholder="Título, autor, editorial o ISBN..."
+                autocomplete="off"
+              >
+            </div>
 
-                <tr>
-                  <td class="cell-code">LIB002</td>
-                  <td class="cell-title">Clean Code</td>
-                  <td>Ciencia y tecnología</td>
-                  <td class="text-right cell-num">$120.000</td>
-                  <td class="text-center cell-num">4</td>
-                  <td>Robert C. Martin</td>
-                  <td><span class="status-badge status-bajo">Stock bajo</span></td>
-                  <td class="cell-actions">
-                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB002" aria-label="Editar Clean Code">Editar</button>
-                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB002" aria-label="Eliminar Clean Code">Eliminar</button>
-                  </td>
-                </tr>
+            <div class="filter-field">
+              <label for="filtro-categoria" class="filter-label">Categoría</label>
+              <select id="filtro-categoria" class="form-input">
+                <option value="">Todas las categorías</option>
+                <option value="Literatura">Literatura</option>
+                <option value="Ciencia y tecnología">Ciencia y tecnología</option>
+                <option value="Educación">Educación</option>
+                <option value="Historia">Historia</option>
+                <option value="Infantil y juvenil">Infantil y juvenil</option>
+                <option value="Desarrollo personal">Desarrollo personal</option>
+              </select>
+            </div>
 
-                <tr>
-                  <td class="cell-code">LIB003</td>
-                  <td class="cell-title">El principito</td>
-                  <td>Infantil y juvenil</td>
-                  <td class="text-right cell-num">$32.000</td>
-                  <td class="text-center cell-num">24</td>
-                  <td>Antoine de Saint-Exupéry</td>
-                  <td><span class="status-badge status-disponible">Disponible</span></td>
-                  <td class="cell-actions">
-                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB003" aria-label="Editar El principito">Editar</button>
-                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB003" aria-label="Eliminar El principito">Eliminar</button>
-                  </td>
-                </tr>
+            <div class="filter-field">
+              <label for="filtro-editorial" class="filter-label">Editorial</label>
+              <select id="filtro-editorial" class="form-input">
+                <option value="">Todas las editoriales</option>
+              </select>
+            </div>
 
-                <tr>
-                  <td class="cell-code">LIB004</td>
-                  <td class="cell-title">Sapiens</td>
-                  <td>Historia</td>
-                  <td class="text-right cell-num">$89.000</td>
-                  <td class="text-center cell-num">0</td>
-                  <td>Yuval Noah Harari</td>
-                  <td><span class="status-badge status-agotado">Agotado</span></td>
-                  <td class="cell-actions">
-                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB004" aria-label="Editar Sapiens">Editar</button>
-                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB004" aria-label="Eliminar Sapiens">Eliminar</button>
-                  </td>
-                </tr>
+            <div class="filter-field">
+              <label for="filtro-estado" class="filter-label">Estado</label>
+              <select id="filtro-estado" class="form-input">
+                <option value="">Todos los estados</option>
+                <option value="Disponible">Disponible</option>
+                <option value="Stock bajo">Stock bajo</option>
+                <option value="Agotado">Agotado</option>
+              </select>
+            </div>
 
-                <tr>
-                  <td class="cell-code">LIB005</td>
-                  <td class="cell-title">Hábitos atómicos</td>
-                  <td>Desarrollo personal</td>
-                  <td class="text-right cell-num">$75.000</td>
-                  <td class="text-center cell-num">40</td>
-                  <td>James Clear</td>
-                  <td><span class="status-badge status-disponible">Disponible</span></td>
-                  <td class="cell-actions">
-                    <button type="button" class="action-btn action-edit" data-action="editar" data-code="LIB005" aria-label="Editar Hábitos atómicos">Editar</button>
-                    <button type="button" class="action-btn action-delete" data-action="eliminar" data-code="LIB005" aria-label="Eliminar Hábitos atómicos">Eliminar</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="filter-actions">
+              <button type="button" class="btn btn-outline btn-sm" id="btn-limpiar-filtros">
+                Limpiar filtros
+              </button>
+            </div>
+          </div>
+
+          <!-- GRID DE TARJETAS DE LIBROS -->
+          <div class="catalog-grid" id="catalogo-grid" aria-live="polite"></div>
+
+          <!-- ESTADO VACÍO (EMPTY STATE) -->
+          <div class="empty-state" id="estado-vacio" hidden>
+            <div class="empty-state-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+            <h3 class="empty-state-title">No encontramos libros con esos criterios</h3>
+            <p class="empty-state-text">
+              Prueba ajustando las palabras clave o limpiando los filtros activos para ver todo el inventario.
+            </p>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-empty-limpiar">
+              Mostrar todos los libros
+            </button>
           </div>
         </section>
 
-        <!-- ESPACIO PREPARADO PARA FASE 5 (CHART.JS) -->
-        <section class="panel-card panel-chart-placeholder" id="estadisticas-panel" aria-labelledby="estadisticas-titulo">
+        <!-- GRÁFICO ESTADÍSTICO (CHART.JS) -->
+        <section class="panel-card" id="estadisticas-panel" aria-labelledby="estadisticas-titulo">
           <div class="panel-card-header">
             <div>
               <span class="eyebrow">Analítica editorial</span>
               <h2 id="estadisticas-titulo" class="panel-card-title">Distribución de libros por categoría</h2>
             </div>
+            <span class="panel-meta">Actualizado en tiempo real</span>
           </div>
-          <p class="chart-placeholder-note">
-            Espacio reservado para la visualización interactiva con Chart.js que se conectará al dataset completo en la Fase 5.
-          </p>
+
+          <div class="chart-wrapper">
+            <canvas id="grafico-categorias" aria-label="Gráfico de barras con cantidad de libros por categoría" role="img"></canvas>
+          </div>
         </section>
       </main>
+    </div>
+  </div>
+
+  <!-- MODAL CRUD: CREAR / EDITAR LIBRO -->
+  <div
+    class="modal-overlay"
+    id="modal-libro"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-libro-titulo"
+    hidden
+  >
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow">Gestión de inventario</span>
+          <h2 id="modal-libro-titulo" class="modal-title">Agregar libro</h2>
+        </div>
+        <button type="button" class="modal-close" id="btn-cerrar-modal" aria-label="Cerrar ventana">
+          &times;
+        </button>
+      </div>
+
+      <form id="form-libro" class="modal-form" novalidate>
+        <input type="hidden" id="libro-id">
+
+        <div class="modal-grid">
+          <div class="form-group">
+            <label for="libro-codigo" class="form-label">Código (LIB###)</label>
+            <input type="text" id="libro-codigo" class="form-input" placeholder="Ej. LIB036" maxlength="6" required>
+            <span class="form-error" id="err-codigo" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-categoria" class="form-label">Categoría</label>
+            <select id="libro-categoria" class="form-input" required>
+              <option value="">Selecciona una categoría</option>
+              <option value="Literatura">Literatura</option>
+              <option value="Ciencia y tecnología">Ciencia y tecnología</option>
+              <option value="Educación">Educación</option>
+              <option value="Historia">Historia</option>
+              <option value="Infantil y juvenil">Infantil y juvenil</option>
+              <option value="Desarrollo personal">Desarrollo personal</option>
+            </select>
+            <span class="form-error" id="err-categoria" role="alert"></span>
+          </div>
+
+          <div class="form-group form-group-full">
+            <label for="libro-titulo" class="form-label">Título del libro</label>
+            <input type="text" id="libro-titulo" class="form-input" placeholder="Ej. El coronel no tiene quien le escriba" minlength="3" maxlength="120" required>
+            <span class="form-error" id="err-titulo" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-autor" class="form-label">Autor</label>
+            <input type="text" id="libro-autor" class="form-input" placeholder="Ej. Gabriel García Márquez" minlength="3" maxlength="80" required>
+            <span class="form-error" id="err-autor" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-editorial" class="form-label">Editorial</label>
+            <input type="text" id="libro-editorial" class="form-input" placeholder="Ej. Alfaguara" minlength="3" maxlength="80" required>
+            <span class="form-error" id="err-editorial" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-isbn" class="form-label">ISBN-13 (13 dígitos)</label>
+            <input type="text" id="libro-isbn" class="form-input" placeholder="Ej. 9789990000036" maxlength="13" inputmode="numeric" required>
+            <span class="form-error" id="err-isbn" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-anio" class="form-label">Año de publicación</label>
+            <input type="number" id="libro-anio" class="form-input" placeholder="Ej. 2024" min="1450" max="2026" required>
+            <span class="form-error" id="err-anio" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-precio" class="form-label">Precio (COP)</label>
+            <input type="number" id="libro-precio" class="form-input" placeholder="Ej. 55000" min="1" step="1" required>
+            <span class="form-error" id="err-precio" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-stock" class="form-label">Stock disponible</label>
+            <input type="number" id="libro-stock" class="form-input" placeholder="Ej. 15" min="0" step="1" required>
+            <span class="form-error" id="err-stock" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="libro-stock-minimo" class="form-label">Stock mínimo</label>
+            <input type="number" id="libro-stock-minimo" class="form-input" placeholder="Ej. 5" min="0" step="1" required>
+            <span class="form-error" id="err-stockMinimo" role="alert"></span>
+          </div>
+
+          <div class="form-group form-checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="libro-activo" checked>
+              <span>Título activo en el catálogo</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline btn-sm" id="btn-cancelar-modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btn-guardar-libro">Guardar libro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÓN DE ELIMINACIÓN (SIN CONFIRM() NATIVO) -->
+  <div
+    class="modal-overlay"
+    id="modal-confirmar"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-confirmar-titulo"
+    hidden
+  >
+    <div class="modal-dialog modal-dialog-sm">
+      <div class="modal-header">
+        <h2 id="modal-confirmar-titulo" class="modal-title">Eliminar libro</h2>
+        <button type="button" class="modal-close" id="btn-cerrar-confirmar" aria-label="Cerrar confirmación">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="confirm-text" id="confirmar-mensaje">
+          ¿Seguro que deseas eliminar este libro del catálogo? Esta acción actualizará los indicadores inmediatamente.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline btn-sm" id="btn-cancelar-eliminar">Cancelar</button>
+        <button type="button" class="btn btn-danger btn-sm" id="btn-confirmar-eliminar">Sí, eliminar</button>
+      </div>
     </div>
   </div>
 
   <!-- CONTENEDOR DE NOTIFICACIONES TOAST -->
   <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
 
+  <!-- Scripts modulares -->
   <script src="validacion.js" defer></script>
   <script src="menu-dashboard.js" defer></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
